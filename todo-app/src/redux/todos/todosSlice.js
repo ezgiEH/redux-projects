@@ -7,10 +7,12 @@ export const todosSlice = createSlice ({
             {
             id: '1',
             title: 'Learn JavaScript',
+            completed: true,
             },
             {
             id: '2',
             title: 'Learn React',
+            completed: false,
             },
         ],
     },
