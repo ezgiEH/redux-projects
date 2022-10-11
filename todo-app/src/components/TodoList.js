@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 
 function TodoList() {
-    const items= useSelector(state => state.todos.items);
+    const items= useSelector(state => state.todos.items); 
     
     return (
         <div>
