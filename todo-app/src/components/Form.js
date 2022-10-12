@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addTodo } from '../redux/todos/todosSlice'
-import { nanoid }  from '@reduxjs/toolkit' //otomatik id oluşturmak için
+
 
 function Form() {
     const dispatch = useDispatch()
@@ -12,13 +12,9 @@ function Form() {
       e.preventDefault()
 
       if(!title) return
-      
-      dispatch(addTodo({
-        id: nanoid(),
-        title: title,
-        completed: false, 
-      }))
 
+      dispatch(addTodo({title}))
+      
       setTitle('')
     }
 
