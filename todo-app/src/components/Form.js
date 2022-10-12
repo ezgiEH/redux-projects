@@ -14,7 +14,6 @@ function Form() {
       if(!title) return
 
       dispatch(addTodo({title}))
-      
       setTitle('')
     }
 
