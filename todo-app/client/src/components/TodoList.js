@@ -27,6 +27,7 @@ function TodoList() {
     if(error){
         return <Error message={error}/>
     }
+    
     return (
         <div>
             <ul className="todo-list">
