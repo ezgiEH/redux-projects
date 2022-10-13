@@ -1,10 +1,11 @@
 import {createSlice, nanoid , createAsyncThunk} from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const getTodosAsync = createAsyncThunk(
     'todos/getTodosAsync',
     async () => {
-        const res = await fetch('http://localhost:7000/todos')
-        return await res.json()
+        const res = await axios('http://localhost:7000/todos')
+        return res.data
     }
 )
 
