@@ -5,22 +5,25 @@ import Masonry from 'react-masonry-css'
 import './style.css'
 import Loading from '../../components/Loading'
 import Error from '../../components/Error'
+import { Link } from 'react-router-dom'
 
 function Home() {
   const characters = useSelector((state) => state.characters.items)
-  const nextPage = useSelector((state) => state.characters.page) 
+  const nextPage = useSelector((state) => state.characters.page)
   const hasNextPage = useSelector((state) => state.characters.hasNextPage)
-  const isLoading = useSelector((state) => state.characters.isLoading)
+  const status = useSelector((state) => state.characters.status)
   const error = useSelector((state) => state.characters.error)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchCharacters())
+    if (status === 'idle') {
+      dispatch(fetchCharacters())
+    }
   }, [dispatch])
 
-  
-  if(error){
-    return <Error message={error}/>
+
+  if (status === 'failed') {
+    return <Error message={error} />
   }
   return (
     <div className='App'>
@@ -33,15 +36,17 @@ function Home() {
         {
           characters.map((character) => (
             <div key={character.char_id}>
-              <img src={character.img} alt={character.name} className="character" />
-              <h3>{character.name}</h3>
+              <Link to={`/char/${character.char_id}`}>
+                <img src={character.img} alt={character.name} className="character" />
+                <h3>{character.name}</h3>
+              </Link>
             </div>
           ))
         }
       </Masonry>
-      {isLoading && <Loading />}
-      {hasNextPage && !isLoading && <button className='btn' onClick={() => dispatch(fetchCharacters(nextPage))}>Load More</button>}
-      {!hasNextPage && !isLoading && <h3>There is nothing to be shown.</h3>}
+      {status === "loading" && <Loading />}
+      {hasNextPage && status && <button className='btn' onClick={() => dispatch(fetchCharacters(nextPage))}>Load More</button>}
+      {!hasNextPage && status && <h3>There is nothing to be shown.</h3>}
     </div>
   )
 }

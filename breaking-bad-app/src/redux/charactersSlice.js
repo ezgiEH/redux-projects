@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice }  from  '@reduxjs/toolkit'
 import axios  from  'axios'
 
+
 const char_limit = 12
 export const fetchCharacters = createAsyncThunk(
     'characters/fetchCharacters',
@@ -10,11 +11,12 @@ export const fetchCharacters = createAsyncThunk(
     }
 )
 
+
 export const charactersSlice = createSlice({
     name: 'characters',
     initialState: {
         items:[],
-        isLoading: false,
+        status: 'idle',
         error: false,
         page: 0,
         hasNextPage: true,
@@ -22,20 +24,16 @@ export const charactersSlice = createSlice({
     reducers: {},
     extraReducers: {
         [fetchCharacters.pending]: (state, action) => {
-            state.isLoading = true
+            state.status = "loading"
         },
         [fetchCharacters.fulfilled]: (state, action) => {
          state.items = [...state.items,...action.payload]
          state.page += 1 
-         state.isLoading = false
+         state.status = "succeeded"
             if(action.payload.length < char_limit){
                 state.hasNextPage = false
             }
         },
-        [fetchCharacters.rejected]: (state, action) => {
-            state.isLoading = false
-            state.error = action.error.message
-        }
     }
 
 })

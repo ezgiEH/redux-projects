@@ -6,6 +6,7 @@ import {
   Link
 } from 'react-router-dom'
 import Home from './pages/Home';
+import Detail from './pages/Detail';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Link to="/detail">Detail</Link>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
+        <Route path="/char/:char_id" element={<Detail />} />
       </Routes>
     </Router>
   );
