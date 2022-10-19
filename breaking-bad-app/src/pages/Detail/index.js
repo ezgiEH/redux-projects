@@ -18,14 +18,14 @@ function Detail() {
     return (
     <div className='App'>
         {loading && <h3>Loading...</h3>}
+        <h1>NAME:{char.name}</h1>
+        <img style={{width: '30%'}} src={char.img} alt={char.name} />
+        <p>NICKNAME: {char.nickname}</p>
+        <p>BIRTHDAY: {char.birthday}</p>
+        <p>STATUS:{char.status}</p>
+        <p>OCCUPATION: {char.occupation}</p>
+        <p>PORTRAYED: {char.portrayed}</p>
         <Link to='/'>Back</Link>
-        <h1>{char.name}</h1>
-        <img style={{width: '50%'}} src={char.img} alt={char.name} />
-        <p>{char.nickname}</p>
-        <p>{char.birthday}</p>
-        <p>{char.status}</p>
-        <p>{char.occupation}</p>
-        <p>{char.portrayed}</p>
     </div>
   )
 }
