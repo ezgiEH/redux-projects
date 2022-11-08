@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, Navigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { contactSelectors, updateContact } from '../../redux/contactSlice';
 
@@ -7,10 +7,13 @@ import { contactSelectors, updateContact } from '../../redux/contactSlice';
 function Edit() {
     const { id } = useParams();
     const dispatch = useDispatch();
+    
     const contact = useSelector(contactSelectors.selectEntities)[id];
     const [name, setName] = useState(contact.name);
     const [number, setNumber] = useState(contact.phone_number);
     const [succes , setSucces] = useState(false);
+
+    if (!contact) return <Navigate replace to="/" />
 
     const handleSubmit = (e) => {
         e.preventDefault()
